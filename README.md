@@ -21,7 +21,8 @@ This template is free and customizable clone or fork the project.
 - Error on loading css and js from WebEasy
 
 # Future work
-- From index.html will be available a form for loading directly (in localhost) the application to test
+- From index.html will be available a form for loading directly (in localhost) the application to test [ in progress ]
+- Deploy WebEasy on a Docker image [ in progress ]
 
 # Feedback 
 Every feedback for improvement are appreciate
