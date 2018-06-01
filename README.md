@@ -17,8 +17,14 @@ This template is free and customizable clone or fork the project.
 - Activate the server with command: "> node server.js" a http server will be up on http://localhost:9000
 - Access your application at: http://localhost:9000/[application-folder]/index.html
 
+# Open issue
+- Error on loading css and js from WebEasy
+
+# Future work
+- From index.html will be available a form for loading directly (in localhost) the application to test
+
 # Feedback 
-Every feedback for improvement are appreciateq
+Every feedback for improvement are appreciate
 
 # Donate
 If you like this, donate on Paypal on PayPal.Me: 
