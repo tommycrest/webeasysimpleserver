@@ -5,7 +5,7 @@ var fs = require('fs');
 var __nomedb = 'application.db';
 
 /**
- creazione dello schema del db per l'applicazione Rss
+	database creation for future work
 */
 function databaseCreation(application) {
  var __pathSchema = __dirname+'/public/application/'+application+'/db/'+__nomedb;
@@ -17,6 +17,9 @@ function databaseCreation(application) {
  }
 }
 
+/**
+	databse schema creation: for future work
+*/
 function databaseSchemaCreation(application, dbtype) {
 	databaseCreation(application);
 	var db = null;
@@ -32,7 +35,7 @@ function databaseSchemaCreation(application, dbtype) {
 }
 
 /**
- attivazione dei vari link ai db per testing
+ db link for future work
 */
 function activateDbLinking() {
 	var allApplication = __dirname+'/public/application/';
@@ -64,35 +67,31 @@ function activateDbLinking() {
 	otherwise 404.html
 */
 function getFile( filePath, res, pageNotFound, req ) {
-	
-	fs.exists(filePath, function(exists) {
+		fs.exists(filePath, function(exists) {
 		if(exists) {
 			//the resource exist on file system
 			fs.readFile(filePath, function(errors, contents ) {
-				
 				if(!errors) {
-					
-					if( filePath.match(/^\/css\/.+/) ) {
-						console.log(filePath)
-						res.writeHead(200, {"Content-Type": "stylesheet"});
-						res.end(contents);
-					} else if( filePath.match(/^\/js\/.+/) ) {
-						res.writeHead(200, {"Content-Type": "text/javascript"});
-						res.end(contents);
-					} /*else if( filePath.match(/public/g)) {
-						res.writeHead(200, {"Content-Type": "text/html"});
-						res.end(contents);
-					} */ else {
-						res.writeHead(200, {"Content-Type": "text/html"});
-						//res.write(fs.readFileSync(filePath));
-						res.end(contents);
-					}
+					var dotoffset = req.url.lastIndexOf('.');
+					var mimetype = dotoffset == -1
+                            ? 'text/plain'
+                            : {
+                                '.html' : 'text/html',
+                                '.ico' : 'image/x-icon',
+                                '.jpg' : 'image/jpeg',
+                                '.png' : 'image/png',
+                                '.gif' : 'image/gif',
+                                '.css' : 'text/css',
+                                '.js' : 'text/javascript'
+                                }[ req.url.substr(dotoffset) ];
+					res.setHeader('Content-type' , mimetype);
+					res.end(contents);
+					//console.log( req.url, mimetype );
 				} else {
 				 console.dir(errors);
 				}
 			});
 		} else {
-			//404.html resource not correctly found
 			fs.readFile(pageNotFound, function(errors, contents ) {
 				if(!errors) {
 					res.writeHead(404, {"Content-Type": "text/html"});
